@@ -1,1 +1,2 @@
 #Instalaçao do framework > pip install Flask
+#Para instalação do formulário pip install flask-wtf

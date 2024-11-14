@@ -1,15 +1,50 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contatos</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contato</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
+    <h1>Entre em Contato</h1>
 
-  <p>Nossos contatos são:</p>
-  <p>E-mail: teste@tesmail.com</p> 
-  <p>Telefone:(21)99989999</p>
 
+    <form method="POST" action="{{ url_for('contatos') }}">
+        {{ form.csrf_token }}
+
+        <div>
+            {{ form.name.label }}<br>
+            {{ form.name(size=30) }}
+        </div>
+
+        <div>
+            {{ form.email.label }}<br>
+            {{ form.email(size=40) }}
+        </div>
+       
+        <div>
+            {{ form.mensagem.label }}<br>
+            {{ form.mensagem(size=70) }}
+        </div>
+       
+       <div>
+            {{ form.submit() }}
+       </div>
+        
+    </form>
+      
+
+
+   
 </body>
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <ul>
+      {% for category, message in messages %}
+        <li class="{{ category }}">{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
 </html>
